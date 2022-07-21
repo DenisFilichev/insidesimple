@@ -8,6 +8,7 @@ import java.util.List;
  * Simple domain object that represents application user.
  *
  * @author Denis Filichev
+ *
  * @version 1.0
  */
 
