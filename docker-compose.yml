@@ -1,0 +1,30 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:11.4-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=insidebase
+      - POSTGRES_PASSWORD=root
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    network_mode: host
+    restart: always
+
+  app:
+    image: denisfilichev/insideapp:1.0
+    ports:
+      - 9090:9090
+    environment:
+      #- PORT=8091
+      #- SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/postgres
+      - POSTGRES_URL=http://localhost:5432/insidebase
+    depends_on:
+      - postgres
+    network_mode: host
+    restart: always
+    
+volumes:
+   db-data:
