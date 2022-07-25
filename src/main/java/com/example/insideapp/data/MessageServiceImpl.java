@@ -1,9 +1,8 @@
 package com.example.insideapp.data;
 
-import com.example.insideapp.dto.Message;
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.Message;
+import com.example.insideapp.model.User;
 import com.example.insideapp.repository.MessageRepository;
-import com.example.insideapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

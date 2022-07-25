@@ -1,4 +1,4 @@
-package com.example.insideapp.dto;
+package com.example.insideapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;

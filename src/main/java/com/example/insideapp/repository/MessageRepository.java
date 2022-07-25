@@ -1,7 +1,7 @@
 package com.example.insideapp.repository;
 
-import com.example.insideapp.dto.Message;
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.Message;
+import com.example.insideapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

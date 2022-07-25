@@ -1,4 +1,4 @@
-package com.example.insideapp.dto.check;
+package com.example.insideapp.dto.util;
 
 public enum TypeMessage {
     SETMESSAGE,

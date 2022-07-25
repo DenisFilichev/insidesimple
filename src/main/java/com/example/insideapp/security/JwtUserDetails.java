@@ -1,6 +1,6 @@
 package com.example.insideapp.security;
 
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

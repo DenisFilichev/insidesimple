@@ -2,16 +2,17 @@ package com.example.insideapp.controllers;
 
 import com.example.insideapp.data.MessageService;
 import com.example.insideapp.data.UserService;
-import com.example.insideapp.dto.check.CheckMessage;
-import com.example.insideapp.dto.check.TypeMessage;
-import com.example.insideapp.dto.Message;
+import com.example.insideapp.dto.util.CheckMessage;
+import com.example.insideapp.dto.util.TypeMessage;
+import com.example.insideapp.model.Message;
 import com.example.insideapp.dto.MessageRequestDto;
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.Instant;
 import java.util.*;
 
@@ -38,7 +39,7 @@ public class MessageController {
     }
 
     @GetMapping(value = "messages")
-    public ResponseEntity getMessage(@RequestBody MessageRequestDto messageRequestDto){
+    public ResponseEntity getMessage(@Valid @RequestBody MessageRequestDto messageRequestDto){
         String name = messageRequestDto.getName();
         checkMessage.getTypeMessage(messageRequestDto);
         if(messageRequestDto.getTypeMessage() == TypeMessage.GETMESSAGE) {
@@ -55,7 +56,7 @@ public class MessageController {
     }
 
     @PostMapping(value = "messages")
-    public ResponseEntity setMessage(@RequestBody MessageRequestDto messageRequestDto){
+    public ResponseEntity setMessage(@Valid @RequestBody MessageRequestDto messageRequestDto){
         ResponseEntity responseEntity;
         String name = messageRequestDto.getName();
         String text = messageRequestDto.getMessage();

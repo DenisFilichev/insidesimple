@@ -1,7 +1,7 @@
 package com.example.insideapp.security;
 
 import com.example.insideapp.data.UserService;
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

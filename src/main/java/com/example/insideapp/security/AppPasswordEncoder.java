@@ -2,14 +2,15 @@ package com.example.insideapp.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AppBCryptPasswordEncoder {
+public class AppPasswordEncoder {
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+    PasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder();
     }
+
 }

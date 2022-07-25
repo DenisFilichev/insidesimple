@@ -1,6 +1,6 @@
 package com.example.insideapp.data;
 
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.User;
 
 import java.util.List;
 

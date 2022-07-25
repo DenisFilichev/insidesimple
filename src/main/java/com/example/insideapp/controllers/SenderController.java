@@ -2,19 +2,21 @@ package com.example.insideapp.controllers;
 
 import com.example.insideapp.data.UserService;
 import com.example.insideapp.dto.AuthenticationRequestDto;
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.User;
 import com.example.insideapp.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,18 +41,17 @@ public class SenderController {
     }
 
     @RequestMapping(value = "/rest/reg", method = RequestMethod.POST)
-    public User registration(@RequestBody AuthenticationRequestDto requestDto){
+    public ResponseEntity registration(@Valid @RequestBody AuthenticationRequestDto requestDto){
         String username = requestDto.getUsername();
         String password = requestDto.getPassword();
         User user = userService.getUserByUsername(username);
-        if(user==null) {
+        if (user == null) {
             user = new User();
             user.setUsername(username);
             user.setPassword(password);
             user = userService.register(user);
         }
-        return user;
-
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/rest/login", method = RequestMethod.POST)

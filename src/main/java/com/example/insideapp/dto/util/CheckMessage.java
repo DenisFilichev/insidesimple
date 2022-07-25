@@ -1,6 +1,6 @@
-package com.example.insideapp.dto.check;
+package com.example.insideapp.dto.util;
 
-import com.example.insideapp.dto.Message;
+import com.example.insideapp.model.Message;
 import com.example.insideapp.dto.MessageRequestDto;
 
 import java.util.List;

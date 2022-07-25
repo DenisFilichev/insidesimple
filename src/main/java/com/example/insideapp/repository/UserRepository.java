@@ -1,6 +1,6 @@
 package com.example.insideapp.repository;
 
-import com.example.insideapp.dto.User;
+import com.example.insideapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -1,6 +1,9 @@
 package com.example.insideapp.dto;
 
-import com.example.insideapp.dto.check.TypeMessage;
+import com.example.insideapp.dto.util.TypeMessage;
+import com.example.insideapp.model.User;
+
+import javax.validation.constraints.*;
 
 /**
  * DTO class for validation (message) request.
@@ -10,7 +13,11 @@ import com.example.insideapp.dto.check.TypeMessage;
  */
 
 public class MessageRequestDto {
+    @NotNull(message = "name can't be empty")
+    @Size(min = 1, message = "name can't be empty")
     private String name;
+    @NotNull(message = "message can't be empty")
+    @Size(min = 1, message = "message can't be empty")
     private String message;
     private TypeMessage typeMessage;
     private int countMessage;

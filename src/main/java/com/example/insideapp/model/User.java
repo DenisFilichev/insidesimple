@@ -1,5 +1,7 @@
-package com.example.insideapp.dto;
+package com.example.insideapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,9 +25,11 @@ public class User {
     @Column(name = "username", nullable = false, length = 100)
     private String username;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Message> messages = new LinkedList<>();
 
