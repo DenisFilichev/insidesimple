@@ -40,19 +40,23 @@ public class MessageController {
 
     @GetMapping(value = "messages")
     public ResponseEntity getMessage(@Valid @RequestBody MessageRequestDto messageRequestDto){
+        ResponseEntity responseEntity;
         String name = messageRequestDto.getName();
         checkMessage.getTypeMessage(messageRequestDto);
         if(messageRequestDto.getTypeMessage() == TypeMessage.GETMESSAGE) {
             User user = userService.getUserByUsername(name);
-            messageRequestDto.setUser(user);
-            Map<Object, Object> response = new HashMap<>();
-            response.put("name", name);
-            List<Message> messageList = checkMessage.getMessagesByCount(messageRequestDto);
-            response.put("message", messageList.stream().map(e -> e.getTexts()).toArray(String[]::new));
-            return new ResponseEntity(response, HttpStatus.OK);
+            if (user != null) {
+                messageRequestDto.setUser(user);
+                Map<Object, Object> response = new HashMap<>();
+                response.put("name", name);
+                List<Message> messageList = checkMessage.getMessagesByCount(messageRequestDto);
+                response.put("message", messageList.stream().map(e -> e.getTexts()).toArray(String[]::new));
+                responseEntity = new ResponseEntity(response, HttpStatus.OK);
+            }else responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
         }else {
-            return setMessage(messageRequestDto);
+            responseEntity = setMessage(messageRequestDto);
         }
+        return responseEntity;
     }
 
     @PostMapping(value = "messages")
@@ -60,17 +64,22 @@ public class MessageController {
         ResponseEntity responseEntity;
         String name = messageRequestDto.getName();
         String text = messageRequestDto.getMessage();
-        User user = userService.getUserByUsername(name);
-        if(user!=null){
-            Message message = new Message();
-            message.setTexts(text);
-            message.setCreated(Instant.now());
-            message.setUpdated(Instant.now());
-            message.setUser(user);
-            message = messageService.save(message);
-            responseEntity = new ResponseEntity(message, HttpStatus.OK);
-        }else responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
-
-        return responseEntity;
+        checkMessage.getTypeMessage(messageRequestDto);
+        if(messageRequestDto.getTypeMessage() == TypeMessage.SETMESSAGE) {
+            User user = userService.getUserByUsername(name);
+            if (user != null) {
+                Message message = new Message();
+                message.setTexts(text);
+                message.setCreated(Instant.now());
+                message.setUpdated(Instant.now());
+                message.setUser(user);
+                message = messageService.save(message);
+                responseEntity = new ResponseEntity(message, HttpStatus.OK);
+            } else responseEntity = new ResponseEntity(HttpStatus.NOT_FOUND);
+            return responseEntity;
+        }else {
+            responseEntity = getMessage(messageRequestDto);
+        }
+        return  responseEntity;
     }
 }
